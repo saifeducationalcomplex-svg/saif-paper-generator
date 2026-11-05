@@ -360,11 +360,131 @@
     .lang-row{display:none !important;}
     .bec-head, .sec-bar, .black-band{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
   }
+
+  /* ================= WEBSITE SHELL (redesign) ================= */
+  html{scroll-behavior:smooth;}
+  #home, #generator, #coverage, #faq, #app, #about, #contact{scroll-margin-top:76px;}
+
+  /* ---------- Sticky top navigation ---------- */
+  .nv-bar{position:sticky; top:0; z-index:200; background:#fff; border-bottom:3px solid var(--gold); box-shadow:0 2px 12px rgba(60,30,10,.10);}
+  .nv-in{max-width:1180px; margin:0 auto; padding:8px 18px; display:flex; align-items:center; gap:16px;}
+  .nv-brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--maroon); font-weight:800; font-size:17px; letter-spacing:.3px; white-space:nowrap;}
+  .nv-brand .nv-gold{color:#a87c22; font-weight:700;}
+  .nv-badge{width:40px; height:40px; border:2px solid var(--gold); border-radius:50%; background:var(--maroon); color:var(--gold-light); display:flex; align-items:center; justify-content:center; font-size:17px; line-height:1; flex:0 0 auto;}
+  .nv-links{margin-left:auto; display:flex; gap:2px; align-items:center; overflow-x:auto; scrollbar-width:none;}
+  .nv-links::-webkit-scrollbar{display:none;}
+  .nv-links a{color:var(--ink); text-decoration:none; font-size:14.5px; font-weight:600; padding:7px 10px; border-radius:7px; white-space:nowrap;}
+  .nv-links a:hover{background:#fdf3e0; color:var(--maroon);}
+  .nv-links .urdu{line-height:1.85;}
+  .nv-cta{background:var(--gold); color:#3a2403; text-decoration:none; font-weight:800; padding:8px 16px; border-radius:999px; font-size:15px; white-space:nowrap; box-shadow:0 2px 8px rgba(201,151,63,.45); flex:0 0 auto;}
+  .nv-cta:hover{filter:brightness(1.07);}
+  .nv-cta .urdu{line-height:1.85;}
+  @media (max-width:780px){ .nv-brand .nv-name{display:none;} .nv-links a{padding:6px 7px; font-size:13.5px;} .nv-in{gap:8px; padding:8px 10px;} }
+
+  /* ---------- Hero ---------- */
+  .hero-sec{position:relative; overflow:hidden; color:#fff; border-bottom:4px solid var(--gold);
+    background:
+      radial-gradient(circle at 15% 18%, rgba(255,217,77,.15), transparent 42%),
+      radial-gradient(circle at 85% 92%, rgba(255,217,77,.10), transparent 45%),
+      linear-gradient(140deg, var(--maroon-dark) 0%, var(--maroon) 55%, #8f1d30 100%);}
+  .hero-sec::before{content:""; position:absolute; inset:0; background-image:radial-gradient(rgba(255,217,77,.13) 1.2px, transparent 1.3px); background-size:26px 26px; pointer-events:none;}
+  .hero-in{position:relative; max-width:1180px; margin:0 auto; padding:46px 18px 40px; text-align:center;}
+  .hero-kicker{font-size:12.5px; letter-spacing:3px; color:var(--gold-light); font-weight:700; margin-bottom:12px;}
+  .hero-ur{font-size:44px; line-height:2.0; font-weight:400; color:#fff;}
+  .hero-en{font-size:24px; font-weight:800; letter-spacing:.4px; color:var(--gold-light); margin-top:4px;}
+  .hero-sub{font-size:16px; line-height:1.7; color:#f6e8c8; max-width:780px; margin:14px auto 0;}
+  .hero-sub .urdu{line-height:2.05; font-size:17px;}
+  .hero-btns{margin-top:26px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
+  .btn-hero-gold{background:var(--gold); color:#3a2403; text-decoration:none; font-weight:800; font-size:16.5px; padding:12px 26px; border-radius:999px; box-shadow:0 4px 14px rgba(0,0,0,.25);}
+  .btn-hero-gold:hover{filter:brightness(1.08);}
+  .btn-hero-gold .urdu{line-height:1.75;}
+  .btn-hero-ghost{background:rgba(255,255,255,.08); border:1.5px solid var(--gold-light); color:#fff; text-decoration:none; font-weight:700; font-size:16px; padding:12px 24px; border-radius:999px;}
+  .btn-hero-ghost:hover{background:rgba(255,255,255,.16);}
+  .btn-hero-ghost .urdu{line-height:1.75;}
+  .hero-stats{margin:34px auto 0; max-width:860px; display:flex; flex-wrap:wrap; justify-content:center; gap:10px;}
+  .hstat{background:rgba(0,0,0,.22); border:1px solid rgba(255,217,77,.35); border-radius:12px; padding:10px 20px; min-width:128px;}
+  .hstat b{display:block; font-size:23px; color:var(--gold-light);}
+  .hstat span{font-size:15.5px; color:#fff; line-height:1.95;}
+  @media (max-width:640px){ .hero-ur{font-size:31px;} .hero-en{font-size:19px;} .hero-in{padding:34px 14px 30px;} }
+
+  /* ---------- Features strip ---------- */
+  .feat-sec{max-width:1180px; margin:0 auto; padding:28px 18px 6px;}
+  .sec-title{font-size:20px; color:var(--maroon); text-align:center; margin-bottom:16px;}
+  .sec-title .urdu{line-height:1.95;}
+  .feat-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  @media (max-width:920px){ .feat-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:600px){ .feat-grid{grid-template-columns:1fr;} }
+  .feat-card{background:#fff; border:1px solid var(--line); border-top:3px solid var(--gold); border-radius:12px; padding:18px 16px; box-shadow:0 2px 10px rgba(60,30,10,.05);}
+  .feat-ic{width:46px; height:46px; border-radius:12px; background:#fdf3e0; color:var(--maroon); display:flex; align-items:center; justify-content:center; margin-bottom:10px;}
+  .feat-ic svg{width:26px; height:26px;}
+  .feat-card h3{font-size:19px; font-weight:400; color:var(--maroon); line-height:1.95; margin-bottom:4px;}
+  .feat-card p{font-size:14px; line-height:1.6; color:#4c463c;}
+
+  /* ---------- Tool section heading ---------- */
+  .tool-head{max-width:1180px; margin:0 auto; padding:22px 18px 0; text-align:center;}
+  .tool-head h2{font-size:23px; color:var(--maroon);}
+  .tool-head h2 .urdu{line-height:1.95;}
+  .tool-head p{color:var(--muted); font-size:14.5px; margin-top:5px;}
+  .tool-head p .urdu{line-height:1.95;}
+
+  /* ---------- About section ---------- */
+  .about-sec{max-width:1180px; margin:0 auto; padding:2px 18px 10px;}
+  .about-card h2{font-size:19px;}
+  .about-card h2 .urdu{line-height:1.95;}
+  .about-card p{font-size:15px; line-height:1.65; color:#33302a; margin-bottom:10px;}
+  .about-card p:last-child{margin-bottom:0;}
+
+  /* ---------- Rich footer (keeps .site-footer identity) ---------- */
+  .site-footer{max-width:none; margin:34px 0 0; padding:0; text-align:left; font-size:14px; color:#f6e8c8;
+    background:linear-gradient(160deg, var(--maroon-dark), var(--maroon)); border-top:4px solid var(--gold);}
+  .ft-in{max-width:1180px; margin:0 auto; padding:32px 18px 0;}
+  .ft-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1.25fr; gap:26px;}
+  @media (max-width:920px){ .ft-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .ft-grid{grid-template-columns:1fr;} }
+  .ft-col h4{color:var(--gold-light); font-size:15px; margin-bottom:12px; letter-spacing:.4px;}
+  .ft-col h4 .urdu{line-height:1.9;}
+  .ft-col a{display:block; color:#f6e8c8; text-decoration:none; padding:3px 0; font-size:14px;}
+  .ft-col a:hover{color:#fff; text-decoration:underline;}
+  .ft-col a .urdu{line-height:1.9;}
+  .ft-col p{line-height:1.65; margin-bottom:10px; font-size:14px;}
+  .ft-list{list-style:none;}
+  .ft-list li{padding:3px 0; font-size:14px;}
+  .ft-list li::before{content:"\25B8  "; color:var(--gold);}
+  .ft-logo{display:flex; align-items:center; gap:10px; margin-bottom:12px; color:#fff; font-size:17px;}
+  .ft-motto{color:var(--gold-light); font-style:italic;}
+  .ft-col a.ft-phone{display:inline-block; color:var(--gold-light); font-weight:800; font-size:17px; letter-spacing:.6px; padding:0;}
+  .ft-bottom{border-top:1px solid rgba(255,217,77,.25); margin-top:24px; padding:14px 0 18px; text-align:center; font-size:13px; color:#e8d9ae;}
+
+  /* ---------- Print + screenshot helpers: hide the whole website shell ---------- */
+  @media print{
+    .nv-bar, .hero-sec, .feat-sec, .tool-head, .about-sec{display:none !important;}
+  }
+  body.paperonly .nv-bar, body.paperonly .hero-sec, body.paperonly .feat-sec,
+  body.paperonly .tool-head, body.paperonly .about-sec,
+  body.keyonly .nv-bar, body.keyonly .hero-sec, body.keyonly .feat-sec,
+  body.keyonly .tool-head, body.keyonly .about-sec{display:none !important;}
 </style>
 </head>
 <body>
 
-<header class="site-header">
+<nav class="nv-bar">
+  <div class="nv-in">
+    <a class="nv-brand" href="#home">
+      <span class="nv-badge urdu">س</span>
+      <span class="nv-name">SAIF <span class="nv-gold">Paper Generator</span></span>
+    </a>
+    <div class="nv-links">
+      <a href="#home">Home</a>
+      <a href="#generator">Paper Generator</a>
+      <a href="#coverage"><span class="urdu">مضامین و کلاسز</span></a>
+      <a href="#faq"><span class="urdu">سوالات</span> (FAQ)</a>
+      <a href="#contact"><span class="urdu">رابطہ</span></a>
+    </div>
+    <a class="nv-cta" href="#generator"><span class="urdu">مفت پیپر بنائیں</span></a>
+  </div>
+</nav>
+
+<header class="site-header" id="home">
   <div class="wrap">
     <div class="logo-badge urdu">س</div>
     <div>
@@ -375,6 +495,69 @@
   </div>
 </header>
 
+<section class="hero-sec">
+  <div class="hero-in">
+    <div class="hero-kicker">SAIF EDUCATIONAL COMPLEX &bull; ARIFWALA</div>
+    <h2 class="hero-ur urdu">پاکستان کے اسکولوں کے لیے مفت پیپر جنریٹر</h2>
+    <p class="hero-en">Free Paper Generator for Pakistani Schools</p>
+    <p class="hero-sub">Board-pattern test papers for Classes 9&ndash;12 &mdash; in English &amp; <span class="urdu">اردو</span>, with a full answer key. No sign-up, no charges: pick your chapters and print.<br>
+    <span class="urdu">بورڈ پیٹرن کے ٹیسٹ پیپر — کلاس 9 تا 12، جوابی کلید کے ساتھ، بالکل مفت</span></p>
+    <div class="hero-btns">
+      <a class="btn-hero-gold" href="#generator"><span class="urdu">ابھی پیپر بنائیں</span> &bull; Make a Paper</a>
+      <a class="btn-hero-ghost" href="#app">SAIF School App <span class="urdu">دیکھیں</span></a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><b>8,020</b><span class="urdu">سوالات</span></div>
+      <div class="hstat"><b>406</b><span class="urdu">چیپٹرز</span></div>
+      <div class="hstat"><b>9&ndash;12</b><span class="urdu">کلاسز</span></div>
+      <div class="hstat"><b>9</b><span class="urdu">مضامین</span></div>
+      <div class="hstat"><b>100%</b><span class="urdu">مفت</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="feat-sec">
+  <h2 class="sec-title">Features &mdash; <span class="urdu">خصوصیات</span></h2>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.7 2.6 4 5.6 4 9s-1.3 6.4-4 9c-2.7-2.6-4-5.6-4-9s1.3-6.4 4-9z"/></svg></div>
+      <h3 class="urdu">دو زبانوں میں پیپر</h3>
+      <p>Every question in English with its Urdu translation right below it &mdash; just like real board papers.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4"/><path d="M10.3 12.7 20 3"/><path d="M15 8l3.5 3.5"/></svg></div>
+      <h3 class="urdu">جوابی کلید شامل</h3>
+      <p>A complete teacher&rsquo;s answer key with every paper &mdash; MCQ answers plus marking points for short and long questions.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M9.5 21v-5h5v5"/><path d="M12 7.2h.01"/></svg></div>
+      <h3 class="urdu">اپنے اسکول کا نام</h3>
+      <p>Your own institute&rsquo;s name and details print at the top of every paper &mdash; the tool is free for every school.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6c-2-1.6-4.5-2-8-2v14c3.5 0 6 .4 8 2 2-1.6 4.5-2 8-2V4c-3.5 0-6 .4-8 2z"/><path d="M12 6v14"/></svg></div>
+      <h3 class="urdu">نیا سلیبس (PECTAA)</h3>
+      <p>Questions follow the new Punjab (PECTAA) syllabus and board pattern for Classes 9, 10, 11 and 12.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8V3h10v5"/><rect x="4" y="8" width="16" height="8" rx="2"/><path d="M7 13h10v7H7z"/></svg></div>
+      <h3 class="urdu">پرنٹ / PDF</h3>
+      <p>One click gives a clean printout or a PDF file &mdash; only the paper prints, nothing else.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.6h2"/></svg></div>
+      <h3 class="urdu">موبائل پر آسان</h3>
+      <p>Works smoothly on a phone, tablet or computer &mdash; no app to install, no account to make.</p>
+    </div>
+  </div>
+</section>
+
+<section class="tool-section" id="generator">
+  <div class="tool-head">
+    <h2>Paper Generator &mdash; <span class="urdu">پیپر بنائیں</span></h2>
+    <p>Select your class, subject and chapters &mdash; your paper is ready in seconds. <span class="urdu">کلاس، مضمون اور ابواب منتخب کریں</span></p>
+  </div>
+  
 <div class="layout">
   <main>
     <!-- Controls -->
@@ -478,7 +661,7 @@
   </main>
 
   <!-- Ads sidebar -->
-  <aside class="sidebar">
+  <aside class="sidebar" id="app">
     <p class="ad-label urdu">— اشتہار —</p>
     <div class="ad">
       <div class="ad-urdu urdu">سَیف اسکول ایپ</div>
@@ -502,6 +685,7 @@
     <p class="demo-note">This ad space belongs to SAIF — here the school app is promoted to every visiting teacher.</p>
   </aside>
 </div>
+</section>
 
 <div class="seo-wrap">
 
@@ -510,7 +694,7 @@
     <p>SAIF Paper Generator is a <b>free online test paper maker</b> for teachers and schools in Pakistan. Pick a class, a subject and the chapters you have taught — the tool builds a complete board-pattern test paper in seconds, with MCQs, short questions and long questions, plus a teacher's answer key. The bank holds <b>8,020 questions across 406 chapters</b> for Classes 9, 10, 11 and 12, and everything runs right in your browser: no sign-up, no installation, no fee. Type your own school's name at the top, then print the paper or save it as a PDF.</p>
   </section>
 
-  <section class="card seo-card">
+  <section class="card seo-card" id="coverage">
     <h2>Classes &amp; Subjects Covered</h2>
     <p class="seo-note">Every chapter below is filled with real questions — 10 MCQs, 6 short and 4 long questions per chapter, in English and Urdu (Class 12 Computer Science chapters carry 5 MCQs, 3 short and 2 long). Islamiyat is offered for Classes 9, 10 and 11, and Pakistan Studies for Classes 9, 10 and 12, exactly as in the Punjab board scheme.</p>
     <div class="cov-grid">
@@ -584,7 +768,7 @@
     </ol>
   </section>
 
-  <section class="card seo-card">
+  <section class="card seo-card" id="faq">
     <h2>Frequently Asked Questions</h2>
       <details class="faq"><summary>Is SAIF Paper Generator really free?</summary><p>Yes — completely free. There is no sign-up, no subscription and no per-paper charge. Open the page, make your paper and print it; that is all.</p></details>
       <details class="faq"><summary>Which classes and subjects are covered?</summary><p>Classes 9, 10, 11 and 12 (Matric and FSc) — Physics, Chemistry, Biology, Computer Science, Math, English, Urdu, Islamiyat and Pakistan Studies: 406 chapters and 8,020 questions in total, following the Punjab board pattern.</p></details>
@@ -600,8 +784,54 @@
 
 </div>
 
-<footer class="site-footer">
-  SAIF Paper Generator • Free for every teacher &amp; school • SAIF EDUCATIONAL COMPLEX, Main Road, Mushtaq Nagar, Near Railway Signal, Arifwala • Principal: Naeemullah Kaifi • 0303 4184485
+<section class="about-sec" id="about">
+  <div class="card about-card">
+    <h2><span class="urdu">ہمارے بارے میں</span> &mdash; About SAIF EDUCATIONAL COMPLEX</h2>
+    <p><b>SAIF EDUCATIONAL COMPLEX</b> is an English-medium school at Main Road, Mushtaq Nagar, Near Railway Signal, Arifwala. It offers classes from <b>Play Group to Class 10</b>, an <b>Academy for Classes 5 to Matric</b> and an <b>FSc Academy</b> &mdash; with Nazira Quran taught alongside the Punjab curriculum. The school is led by <b>Principal Naeemullah Kaifi</b> and works under its motto, <i>&ldquo;Education Is Power.&rdquo;</i></p>
+    <p>This free paper generator is the school&rsquo;s small gift to teachers everywhere in Pakistan. For admissions or the SAIF School App, contact us on <b>0303 4184485</b> (call or WhatsApp).</p>
+  </div>
+</section>
+
+<footer class="site-footer" id="contact">
+  <div class="ft-in">
+    <div class="ft-grid">
+      <div class="ft-col">
+        <div class="ft-logo"><span class="nv-badge urdu">س</span><b>SAIF Paper Generator</b></div>
+        <p>Free board-pattern test papers for Classes 9&ndash;12 &mdash; in English &amp; Urdu, with answer keys. A free service of SAIF EDUCATIONAL COMPLEX for every teacher and school in Pakistan.</p>
+        <p class="ft-motto">&ldquo;Education Is Power&rdquo;</p>
+      </div>
+      <div class="ft-col">
+        <h4>Quick Links</h4>
+        <a href="#home">Home</a>
+        <a href="#generator">Paper Generator</a>
+        <a href="#coverage"><span class="urdu">مضامین و کلاسز</span> &mdash; Subjects &amp; Classes</a>
+        <a href="#faq"><span class="urdu">سوالات</span> &mdash; FAQ</a>
+        <a href="#app">SAIF School App</a>
+        <a href="#about"><span class="urdu">ہمارے بارے میں</span> &mdash; About</a>
+      </div>
+      <div class="ft-col">
+        <h4>Subjects</h4>
+        <ul class="ft-list">
+          <li>Physics</li>
+          <li>Chemistry</li>
+          <li>Biology</li>
+          <li>Computer Science</li>
+          <li>Math</li>
+          <li>English</li>
+          <li>Urdu</li>
+          <li>Islamiyat</li>
+          <li>Pakistan Studies</li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4><span class="urdu">رابطہ</span> &mdash; Contact</h4>
+        <p><b>SAIF EDUCATIONAL COMPLEX</b><br>Main Road, Mushtaq Nagar,<br>Near Railway Signal, Arifwala,<br>Punjab, Pakistan</p>
+        <p>Principal: <b>Naeemullah Kaifi</b></p>
+        <p>Phone / WhatsApp:<br><a class="ft-phone" href="https://wa.me/923034184485" target="_blank" rel="noopener">0303 4184485</a></p>
+      </div>
+    </div>
+    <div class="ft-bottom">&copy; 2026 SAIF EDUCATIONAL COMPLEX, Arifwala &bull; Education Is Power</div>
+  </div>
 </footer>
 
 <script>
