@@ -356,6 +356,7 @@
   @media (max-width:640px){ .paper .bi-row{grid-template-columns:1fr;} .paper .bi-ur{border-left:none; padding-left:0;} }
   .ch-item.excluded{background:#fdf1ef;}
   .excl-badge{color:#b03030; font-weight:700; font-size:14px; margin-left:6px;}
+  .alp-note{margin:8px 2px 0; padding:8px 12px; background:#fdf1ef; border:1px dashed #d8a7a0; border-radius:8px; color:#8c2f26; font-size:16px; line-height:2.0;}
   .paper-foot{margin-top:18px; border-top:1.5px solid #111; padding-top:7px; text-align:center; font-size:13px; font-weight:700; letter-spacing:.4px;}
   /* answer key rows */
   #answerKey .k-head{margin-bottom:8px; font-size:15px;}
@@ -611,6 +612,28 @@
   .card{box-shadow:0 5px 20px rgba(56,6,15,.08);}
   .about-card{border-top:3px solid var(--gold);}
   .site-footer{background:linear-gradient(180deg,#57101f,#460c19);}
+
+  /* ----- owner fixes: real crest logo + hero app CTA + mobile nav ----- */
+  .nv-logo{width:40px;height:40px;border-radius:11px;border:2px solid var(--gold);background:#fff;object-fit:contain;padding:2px;flex:0 0 auto;box-shadow:0 2px 8px rgba(60,30,10,.15);}
+  .logo-img{width:58px;height:58px;border-radius:14px;border:2px solid var(--gold);background:#fff;object-fit:contain;padding:3px;flex:0 0 auto;box-shadow:0 3px 12px rgba(0,0,0,.25);}
+  .hero-btns{align-items:flex-start;}
+  .app-cta{display:inline-flex;flex-direction:column;align-items:center;gap:8px;}
+  .btn-hero-app{background:linear-gradient(180deg,var(--gold-light),var(--gold));color:#3a2403;text-decoration:none;font-weight:800;font-size:17px;padding:13px 28px;border-radius:999px;border:2px solid #ffe9a8;animation:appPulse 2.4s ease-out infinite;}
+  .btn-hero-app:hover{filter:brightness(1.07);}
+  .btn-hero-app .urdu{line-height:1.8;}
+  .app-cta-cap{font-size:15px;color:#ffeec2;line-height:1.9;text-shadow:0 1px 6px rgba(0,0,0,.35);}
+  @keyframes appPulse{0%{box-shadow:0 0 0 0 rgba(255,213,92,.55),0 8px 22px rgba(0,0,0,.30);}70%{box-shadow:0 0 0 16px rgba(255,213,92,0),0 8px 22px rgba(0,0,0,.30);}100%{box-shadow:0 0 0 0 rgba(255,213,92,0),0 8px 22px rgba(0,0,0,.30);}}
+  @media (prefers-reduced-motion: reduce){ .btn-hero-app{animation:none;} }
+  @media (max-width:639px){
+    .nv-in{flex-wrap:wrap;gap:6px 8px;padding:8px 10px;}
+    .nv-brand{gap:7px;}
+    .nv-brand .nv-name{display:block;font-size:14.5px;}
+    .nv-logo{width:36px;height:36px;border-radius:10px;}
+    .nv-cta{margin-left:auto;font-size:13.5px;padding:7px 12px;}
+    .nv-links{order:3;flex:1 1 100%;margin-left:0;overflow:visible;}
+    .nv-links a{padding:5px 7px;font-size:13px;}
+    .nv-links a:nth-child(3),.nv-links a:nth-child(4),.nv-links a:nth-child(5){display:none;}
+  }
 </style>
 </head>
 <body>
@@ -618,7 +641,7 @@
 <nav class="nv-bar">
   <div class="nv-in">
     <a class="nv-brand" href="#home">
-      <span class="nv-badge urdu">س</span>
+      <img class="nv-logo" src="saif-logo.jpg" alt="SAIF">
       <span class="nv-name">SAIF <span class="nv-gold">Paper Generator</span></span>
     </a>
     <div class="nv-links">
@@ -634,7 +657,7 @@
 
 <header class="site-header" id="home">
   <div class="wrap">
-    <div class="logo-badge urdu">س</div>
+    <img class="logo-img" src="saif-logo.jpg" alt="SAIF">
     <div>
       <h1>Free Online Paper Generator — <span class="urdu">پاکستان کے اسکولوں کے لیے مفت ٹیسٹ پیپر بنائیں</span></h1>
       <div class="tagline">SAIF Paper Generator <span class="urdu">• سَیف پیپر جنریٹر — چند سیکنڈ میں، بورڈ پیٹرن کے مطابق</span></div>
@@ -653,7 +676,7 @@
     <span class="urdu">تمام پنجاب بورڈز کی مشترکہ سکیم کے مطابق</span></p>
     <div class="hero-btns">
       <a class="btn-hero-gold" href="#generator"><span class="urdu">ابھی پیپر بنائیں</span> &bull; Make a Paper</a>
-      <a class="btn-hero-ghost" href="app.html">SAIF School App <span class="urdu">دیکھیں</span></a>
+      <span class="app-cta"><a class="btn-hero-app" href="app.html"><span class="urdu">اسکول کا سارا انتظام، ایک ایپ میں — دیکھیں</span></a><span class="app-cta-cap urdu">رجسٹر • فیس • حاضری • رزلٹ — سب کچھ 100% آف لائن</span></span>
     </div>
     <div class="hero-stats">
       <div class="hstat"><b>11,979</b><span class="urdu">سوالات</span></div>
@@ -738,6 +761,7 @@
           <button type="button" class="sel-all" id="btnSelAll">Select All • سب منتخب کریں</button>
         </div>
         <div class="ch-list" id="chList"></div>
+        <p class="alp-note urdu" id="alpNote" style="display:none">یہ حذف Smart Syllabus (ALP) کے تحت صرف سالانہ امتحان 2026 کے لیے تھی؛ 2027 کے لیے سرکاری تصدیق نہیں — چاہیں تو یہ چیپٹرز بھی شامل کر لیں۔</p>
         <p class="avail" id="availLine"></p>
       </div>
 
@@ -990,7 +1014,7 @@
   <div class="ft-in">
     <div class="ft-grid">
       <div class="ft-col">
-        <div class="ft-logo"><span class="nv-badge urdu">س</span><b>SAIF Paper Generator</b></div>
+        <div class="ft-logo"><img class="nv-logo" src="saif-logo.jpg" alt="SAIF"><b>SAIF Paper Generator</b></div>
         <p>Free board-pattern test papers for Classes 9&ndash;12 &mdash; in English &amp; Urdu, with answer keys. A free service of SAIF EDUCATIONAL COMPLEX for every teacher and school in Pakistan.</p>
         <p class="ft-motto">&ldquo;Education Is Power&rdquo;</p>
       </div>
@@ -1057,8 +1081,8 @@ function setSrc(m){
   updateTotal();
   if (paper) generate();
 }
-/* ---------- board-excluded chapters (PECTAA ALP, officially verified) ---------- */
-const EXCLUDED = { "9|English": [5, 8, 10], "11|English": [4, 7, 9, 12], "9|Urdu": [9, 11, 15, 17] };
+/* ---------- Smart Syllabus (ALP) deletions — Annual Examination 2026 ONLY; not a standing syllabus exclusion (verified against real 2026 board papers) ---------- */
+const EXCLUDED = { "9|English": [5, 8, 10], "11|English": [4, 7, 9, 12] };
 function isExcluded(cls, subj, n){ const l = EXCLUDED[cls + "|" + subj]; return l ? l.indexOf(n) > -1 : false; }
 
 const MARKS = { mcq:1, short:2, long:5 };
@@ -1157,6 +1181,8 @@ function renderSubjectOptions(cls, selected){
 function renderChapters(cls, subj, prechecked){
   const box = document.getElementById("chList");
   box.innerHTML = "";
+  const alpNote = document.getElementById("alpNote");
+  if (alpNote) alpNote.style.display = EXCLUDED[cls + "|" + subj] ? "" : "none";
   const list = chaptersOf(cls, subj);
   for (const ch of list){
     const lab = document.createElement("label");
@@ -1179,7 +1205,7 @@ function renderChapters(cls, subj, prechecked){
       lab.appendChild(cb);
       const span = document.createElement("span");
       span.innerHTML = "Chapter " + ch.n + " — " + esc(ch.t) +
-        (excl ? ' <span class="excl-badge urdu">حذف شدہ — بورڈ میں شامل نہیں</span>' : '') +
+        (excl ? ' <span class="excl-badge urdu">Smart Syllabus (ALP) — Annual 2026 کے لیے حذف</span>' : '') +
         '<span class="cnt">' + ch.mcq.length + " MCQs • " + ch.short.length + " Short • " + ch.long.length + " Long</span>";
       lab.appendChild(span);
     }
@@ -1310,15 +1336,15 @@ function biRowHTML(it, isMcq){
   if (isMcq && P.urOpts) right += biOptsHTML(P.urOpts, true);
   return '<div class="bi-row"><div class="bi-c bi-en">' + left + '</div><div class="bi-c bi-ur">' + right + '</div></div>';
 }
-/* ---------- coverage line on Urdu/English papers (included syllabus) ---------- */
+/* ---------- coverage line on English papers (included syllabus; Urdu papers carry no exclusion-based coverage line — Urdu has no deleted lessons) ---------- */
 function coverageHTML(){
-  if (!paper || (paper.subj !== "Urdu" && paper.subj !== "English")) return "";
+  if (!paper || paper.subj !== "English") return "";
   const excl = EXCLUDED[paper.cls + "|" + paper.subj] || [];
   let inc = paper.chapters.filter(function(n){ return excl.indexOf(n) < 0; });
   const excSel = paper.chapters.filter(function(n){ return excl.indexOf(n) > -1; });
   if (!inc.length) inc = paper.chapters.slice();
   let s = '<div class="cov-line"><span class="urdu">شامل سلیبس:</span> ' + (paper.subj === "English" ? "Units " : "Chapters ") + inc.join(", ");
-  if (excSel.length) s += ' <span class="urdu">(حذف شدہ ابواب ' + excSel.join("، ") + ' بورڈ سکیم میں شامل نہیں)</span>';
+  if (excSel.length) s += ' <span class="urdu">(Smart Syllabus ALP کے تحت Annual 2026 میں شامل نہیں: ابواب ' + excSel.join("، ") + ')</span>';
   return s + '</div>';
 }
 
