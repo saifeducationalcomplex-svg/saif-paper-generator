@@ -464,6 +464,85 @@
   body.keyonly .nv-bar, body.keyonly .hero-sec, body.keyonly .feat-sec,
   body.keyonly .tool-head, body.keyonly .about-sec{display:none !important;}
 </style>
+<style>
+  /* ===== Combined build: lead gate + one-page A4 ===== */
+  @page { size: A4; margin: 10mm; }
+  .btn-gen:disabled, #btnPrint:disabled { opacity: .45; cursor: not-allowed; }
+  .lead-strip { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+    background: #fdf6e3; border: 1px solid #e5cf8f; border-radius: 8px; padding: 7px 12px; margin-bottom: 12px; font-size: 14px; }
+  .lead-strip .urdu { line-height: 1.9; }
+  .lead-edit { background: #fff; border: 1px solid #b98a1c; color: #7a5b12; border-radius: 6px; padding: 3px 12px;
+    font-size: 13px; cursor: pointer; font-family: inherit; }
+  .lead-edit .urdu { line-height: 1.9; }
+  .gate-card { border: 2px solid var(--maroon); }
+  .gate-note { font-size: 17px; margin: 0 0 12px; }
+  .gate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
+  @media (max-width: 640px) { .gate-grid { grid-template-columns: 1fr; } }
+  .gate-grid label { display: block; font-weight: 600; font-size: 13.5px; margin-bottom: 5px; }
+  .gate-grid input { width: 100%; box-sizing: border-box; padding: 9px 11px; border: 1.5px solid #bbb; border-radius: 8px; font-size: 15px; font-family: inherit; }
+  .gate-consent { font-size: 15.5px; color: #555; margin: 14px 0 4px; }
+  .fit-note { border-radius: 8px; padding: 9px 13px; margin: 0 0 14px; font-size: 14.5px; }
+  .fit-note .urdu { line-height: 1.9; }
+  .fit-note.over { background: #fdecea; border: 1.5px solid #d9534f; color: #7a1d18; }
+  .fit-note.ok { background: #eaf7ec; border: 1px solid #9ccc9f; color: #225c2a; }
+  .fit-note .btn-gold { margin-left: 10px; }
+  .key-note { font-size: 13px; color: #666; margin: 10px 0 0; }
+  .key-note .urdu { line-height: 1.9; }
+  /* Hidden measurement scope: A4 printable width (210mm - 2x10mm margins) */
+  #fitBox { position: fixed; left: -10000px; top: 0; width: 190mm; visibility: hidden; pointer-events: none; }
+  .ppv-scope .paper { box-shadow: none; margin: 0; max-width: none; }
+  .ppv-scope .ch-tag { display: none !important; }
+  /* Compact one-page typography — measurement scope (identical to print) */
+  .ppv-scope .paper{font-size:10.5pt; line-height:1.32; padding:5mm 3mm;}
+  .ppv-scope .paper .bec-head{margin-bottom:5px; border-width:1.5px;}
+  .ppv-scope .paper .bec-name{font-size:16pt; line-height:1.15; padding:5px 8px 0;}
+  .ppv-scope .paper .bec-name .bec-ph{font-size:11pt;}
+  .ppv-scope .paper .bec-sub{font-size:9.5pt; padding:0 8px;}
+  .ppv-scope .paper .bec-darood{font-size:9pt; letter-spacing:1.5px; padding:1px 8px 4px;}
+  .ppv-scope .paper .info-strip .cell{font-size:9.5pt; padding:3px 7px;}
+  .ppv-scope .paper .black-band{font-size:10.5pt; padding:4px 9px;}
+  .ppv-scope .paper .sec-bar{margin:7px 0 5px; border-width:1.2px;}
+  .ppv-scope .paper .sec-bar .sec-marks{font-size:11pt; padding:1px 8px;}
+  .ppv-scope .paper .sec-bar .sec-title{font-size:11pt; line-height:1.25; padding:3px 8px;}
+  .ppv-scope .paper .sec-bar .sec-title .sec-ur{font-size:11.5pt; line-height:1.55;}
+  .ppv-scope .paper .sec-bar .sec-num{font-size:13pt; line-height:1.5; padding:1px 9px;}
+  .ppv-scope .paper .sec-instr{font-size:9.5pt; line-height:1.3; margin:0 0 5px;}
+  .ppv-scope .paper .sec-instr .urdu{font-size:11pt; line-height:1.6;}
+  .ppv-scope .paper li{margin-bottom:3.5px;}
+  .ppv-scope .paper .q-alt{font-size:11.5pt; line-height:1.8;}
+  .ppv-scope .paper .opts{font-size:10pt; line-height:1.3; margin:2px 0 1px 2px;}
+  .ppv-scope .paper .opts span{margin-right:12px;}
+  .ppv-scope .paper .opts.ur-opt{font-size:11pt; line-height:1.8;}
+  .ppv-scope .paper .q-num{font-size:10.5pt;}
+  .ppv-scope .paper .paper-foot{margin-top:8px; padding-top:4px; font-size:9.5pt;}
+  @media print {
+    .gate-card, .fit-note, .key-note, .lead-strip, #fitBox { display: none !important; }
+    body { margin: 0; }
+  /* Compact one-page typography — print (identical to measurement scope) */
+  .paper{font-size:10.5pt; line-height:1.32; padding:5mm 3mm;}
+  .paper .bec-head{margin-bottom:5px; border-width:1.5px;}
+  .paper .bec-name{font-size:16pt; line-height:1.15; padding:5px 8px 0;}
+  .paper .bec-name .bec-ph{font-size:11pt;}
+  .paper .bec-sub{font-size:9.5pt; padding:0 8px;}
+  .paper .bec-darood{font-size:9pt; letter-spacing:1.5px; padding:1px 8px 4px;}
+  .paper .info-strip .cell{font-size:9.5pt; padding:3px 7px;}
+  .paper .black-band{font-size:10.5pt; padding:4px 9px;}
+  .paper .sec-bar{margin:7px 0 5px; border-width:1.2px;}
+  .paper .sec-bar .sec-marks{font-size:11pt; padding:1px 8px;}
+  .paper .sec-bar .sec-title{font-size:11pt; line-height:1.25; padding:3px 8px;}
+  .paper .sec-bar .sec-title .sec-ur{font-size:11.5pt; line-height:1.55;}
+  .paper .sec-bar .sec-num{font-size:13pt; line-height:1.5; padding:1px 9px;}
+  .paper .sec-instr{font-size:9.5pt; line-height:1.3; margin:0 0 5px;}
+  .paper .sec-instr .urdu{font-size:11pt; line-height:1.6;}
+  .paper li{margin-bottom:3.5px;}
+  .paper .q-alt{font-size:11.5pt; line-height:1.8;}
+  .paper .opts{font-size:10pt; line-height:1.3; margin:2px 0 1px 2px;}
+  .paper .opts span{margin-right:12px;}
+  .paper .opts.ur-opt{font-size:11pt; line-height:1.8;}
+  .paper .q-num{font-size:10.5pt;}
+  .paper .paper-foot{margin-top:8px; padding-top:4px; font-size:9.5pt;}
+  }
+</style>
 </head>
 <body>
 
@@ -563,6 +642,7 @@
     <!-- Controls -->
     <section class="card controls-card">
       <h2>Paper Settings — <span class="urdu">پیپر کی ترتیبات</span></h2>
+      <div class="lead-strip no-print" id="leadStrip" style="display:none"></div>
       <div class="inst-row">
         <label>Institute Name / ادارے کا نام (paper پر یہی نام چھپے گا)</label>
         <input type="text" id="inInst" value="SAIF EDUCATIONAL COMPLEX, Arifwala">
@@ -636,9 +716,43 @@
           <button class="btn-ghost" id="btnKey">Show Answer Key</button>
         </div>
       </div>
-      <p class="warn" id="warnMsg"></p>
+            <p class="key-note no-print"><span class="urdu">جوابی کلید الگ صفحے پر چھپے گی</span> — the answer key prints on a separate page.</p>
+<p class="warn" id="warnMsg"></p>
       <p class="hint">Questions are spread as evenly as possible across the selected chapters, with no repeats. Any single question can be replaced with its <b>Swap / بدلیں</b> button. Saved papers stay in <b>this browser</b> only (free — no account needed).</p>
     </section>
+
+    <!-- School details gate (lead capture) -->
+    <section class="card gate-card no-print" id="gateCard" style="display:none">
+      <h2>School Details — <span class="urdu">اسکول کی تفصیل</span></h2>
+      <p class="gate-note urdu">مفت پیپر بنانے کے لیے پہلے اپنے اسکول کی تفصیل لکھیں</p>
+      <div class="gate-grid">
+        <div>
+          <label>School / Institute Name * — <span class="urdu">اسکول کا نام</span></label>
+          <input type="text" id="gSchool" placeholder="e.g. ABC Public School">
+        </div>
+        <div>
+          <label>WhatsApp Number * — <span class="urdu">واٹس ایپ نمبر</span></label>
+          <input type="text" id="gNumber" inputmode="tel" placeholder="03XX-XXXXXXX">
+        </div>
+        <div>
+          <label>Teacher Name — <span class="urdu">استاد کا نام</span> (optional)</label>
+          <input type="text" id="gTeacher" placeholder="Your name">
+        </div>
+        <div>
+          <label>City — <span class="urdu">شہر</span> (optional)</label>
+          <input type="text" id="gCity" placeholder="Your city">
+        </div>
+      </div>
+      <p class="urdu gate-consent">یہ تفصیل اس لیے لی جا رہی ہے تاکہ ہم آپ سے رابطہ کر سکیں — نمبر کسی اور کو نہیں دیا جائے گا۔</p>
+      <p class="warn" id="gateErr"></p>
+      <div class="btns">
+        <button class="btn-gen" id="btnGateSave">Save &amp; Make Paper • <span class="urdu">محفوظ کریں اور پیپر بنائیں</span></button>
+        <button class="btn-ghost" id="btnGateCancel" style="display:none">Cancel</button>
+      </div>
+    </section>
+
+    <!-- One-page fit notice -->
+    <div id="fitNotice" class="no-print" style="display:none"></div>
 
     <!-- Paper preview -->
     <section class="paper" id="paper">
@@ -1178,6 +1292,9 @@ function render(){
 
 /* ---------- actions ---------- */
 function generate(){
+  let leadOK = false;
+  try { leadOK = !!localStorage.getItem("saif_lead_v1"); } catch (e) { leadOK = true; }
+  if (!leadOK){ if (typeof openGate === "function") openGate(true); return; }
   const cls = curCls(), subj = curSubj(), chs = selectedChapters();
   if (!chs.length){
     document.getElementById("warnMsg").textContent = "Please select at least one chapter first.";
@@ -1200,6 +1317,13 @@ function generate(){
     }
   };
   render();
+  try {
+    const ld = JSON.parse(localStorage.getItem("saif_lead_v1") || "null");
+    if (ld && typeof fbLogGeneration === "function"){
+      fbLogGeneration({ number: ld.number, school: ld.school, cls: cls, subj: subj, chapters: chs.length, lang: langMode, totalMarks: paperTotals() });
+    }
+    if (typeof fbFlush === "function") fbFlush();
+  } catch (e) {}
 }
 function swapQ(type, pos){
   if (!paper) return;
@@ -1308,7 +1432,7 @@ document.getElementById("btnSelAll").addEventListener("click", function(){
 document.getElementById("btnGenerate").addEventListener("click", generate);
 document.getElementById("btnShuffle").addEventListener("click", generate);
 document.getElementById("btnSave").addEventListener("click", savePaper);
-document.getElementById("btnPrint").addEventListener("click", function(){ if (!paper) generate(); if (paper) window.print(); });
+document.getElementById("btnPrint").addEventListener("click", function(){ if (typeof FIT !== "undefined" && FIT.state === "over") return; if (!paper) generate(); if (!paper) return; if (typeof checkFit === "function") checkFit(); if (typeof FIT !== "undefined" && FIT.state === "over") return; window.print(); });
 document.getElementById("btnKey").addEventListener("click", function(){
   if (!paper) generate();
   if (!paper) return;
@@ -1345,6 +1469,311 @@ document.querySelectorAll("#langSeg button").forEach(function(b){
   if (q.get("paperonly") === "1") document.body.classList.add("paperonly");
   if (q.get("keyonly") === "1") document.body.classList.add("keyonly");
 })();
+</script>
+<script>
+/* =====================================================================
+   LEAD GATE + FIREBASE QUEUE + ONE-PAGE FIT  (combined build)
+   - No visitor accounts: a mandatory school-details form gates paper
+     generation; the details double as the site's lead capture.
+   - All Firebase use is fire-and-forget behind an offline queue, so the
+     tool keeps working when the SDK or the network is unavailable.
+   ===================================================================== */
+
+/* ---------- lead storage ---------- */
+const LEAD_KEY = "saif_lead_v1";
+const PEND_KEY = "saif_pending_writes";
+let pendingGenerate = false;
+
+function loadLead(){
+  try { const v = localStorage.getItem(LEAD_KEY); return v ? JSON.parse(v) : null; }
+  catch (e) { return null; }
+}
+function storeLead(l){
+  try { localStorage.setItem(LEAD_KEY, JSON.stringify(l)); } catch (e) {}
+}
+function normalizeNumber(raw){
+  let d = String(raw || "").replace(/[\s\-()]/g, "");
+  if (/^\+92\d{10}$/.test(d)) d = "0" + d.slice(3);
+  else if (/^92\d{10}$/.test(d)) d = "0" + d.slice(2);
+  return /^03\d{9}$/.test(d) ? d : null;
+}
+
+/* ---------- offline write queue ---------- */
+function loadQueue(){
+  try { return JSON.parse(localStorage.getItem(PEND_KEY) || "[]"); } catch (e) { return []; }
+}
+function storeQueue(q){
+  try { localStorage.setItem(PEND_KEY, JSON.stringify(q.slice(-60))); } catch (e) {}
+}
+function fbEnqueue(job){
+  if (window.__fbDo){
+    window.__fbDo(job).then(function(ok){
+      if (!ok){ const q = loadQueue(); q.push(job); storeQueue(q); }
+    });
+  } else {
+    const q = loadQueue(); q.push(job); storeQueue(q);
+  }
+}
+function fbFlush(){
+  if (!window.__fbDo) return;
+  const q = loadQueue();
+  if (!q.length) return;
+  storeQueue([]);
+  q.forEach(function(job){
+    window.__fbDo(job).then(function(ok){
+      if (!ok){ const q2 = loadQueue(); q2.push(job); storeQueue(q2); }
+    });
+  });
+}
+window.fbFlush = fbFlush;
+window.addEventListener("online", fbFlush);
+function fbUpsertLead(lead){
+  fbEnqueue({ kind: "lead", id: lead.number, data: {
+    school: lead.school, teacher: lead.teacher || "", city: lead.city || "", number: lead.number
+  }});
+}
+function fbLogGeneration(meta){ fbEnqueue({ kind: "gen", data: meta }); }
+
+/* ---------- gate UI ---------- */
+function openGate(withPending){
+  if (withPending) pendingGenerate = true;
+  const card = document.getElementById("gateCard");
+  if (!card) return;
+  const lead = loadLead();
+  document.getElementById("btnGateCancel").style.display = lead ? "" : "none";
+  if (lead){
+    document.getElementById("gSchool").value = lead.school || "";
+    document.getElementById("gNumber").value = lead.number || "";
+    document.getElementById("gTeacher").value = lead.teacher || "";
+    document.getElementById("gCity").value = lead.city || "";
+  }
+  document.getElementById("gateErr").textContent = "";
+  card.style.display = "block";
+  card.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+function closeGate(){ document.getElementById("gateCard").style.display = "none"; }
+function refreshLeadUI(){
+  const lead = loadLead();
+  const strip = document.getElementById("leadStrip");
+  if (!strip) return;
+  if (lead){
+    strip.style.display = "flex";
+    strip.innerHTML = '<span><span class="urdu">ادارہ:</span> <b></b> <span class="ld-num"></span></span>';
+    strip.querySelector("b").textContent = lead.school;
+    strip.querySelector(".ld-num").textContent = "• " + lead.number;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "lead-edit";
+    btn.innerHTML = '<span class="urdu">تفصیل تبدیل کریں</span>';
+    btn.addEventListener("click", function(){ openGate(false); });
+    strip.appendChild(btn);
+    const inst = document.getElementById("inInst");
+    if (inst && (!inst.value.trim() || /saif educational complex/i.test(inst.value))) inst.value = lead.school;
+  } else {
+    strip.style.display = "none";
+    strip.innerHTML = "";
+  }
+}
+function submitGate(){
+  const school = document.getElementById("gSchool").value.trim();
+  const num = normalizeNumber(document.getElementById("gNumber").value);
+  const teacher = document.getElementById("gTeacher").value.trim();
+  const city = document.getElementById("gCity").value.trim();
+  const err = document.getElementById("gateErr");
+  if (school.length < 4){
+    err.innerHTML = '<span class="urdu">براہ کرم اپنے اسکول کا مکمل نام لکھیں (کم از کم 4 حروف)۔</span> Please write your school\'s full name.';
+    document.getElementById("gSchool").focus();
+    return;
+  }
+  if (!num){
+    err.innerHTML = '<span class="urdu">درست واٹس ایپ نمبر لکھیں — مثال: 03001234567</span> Please enter a valid WhatsApp number.';
+    document.getElementById("gNumber").focus();
+    return;
+  }
+  err.textContent = "";
+  const lead = { school: school, teacher: teacher, city: city, number: num };
+  storeLead(lead);
+  document.getElementById("inInst").value = school;
+  fbUpsertLead(lead);
+  refreshLeadUI();
+  closeGate();
+  if (pendingGenerate){ pendingGenerate = false; generate(); }
+}
+document.getElementById("btnGateSave").addEventListener("click", submitGate);
+document.getElementById("btnGateCancel").addEventListener("click", function(){
+  pendingGenerate = false;
+  closeGate();
+});
+refreshLeadUI();
+
+/* =====================================================================
+   ONE-PAGE A4 FIT ENGINE
+   Measures the question paper (answer key excluded) exactly as it will
+   print — a clone in a hidden 190mm-wide scope carrying the print
+   typography — and blocks printing while it exceeds one A4 page.
+   ===================================================================== */
+const FIT = { state: "unknown", lastPx: 0, maxPx: 0, fitNote: null };
+function fitMaxPx(){
+  /* Calibrated against real --print-to-pdf page counts (headless Chromium,
+     this exact page + fonts): 1239 scope px printed on 1 page, 1331 scope px
+     spilled to 2 — threshold set mid-range. Print renders ~15% shorter than
+     the on-screen measurement, so the raw 277mm figure (1047px) is NOT used. */
+  if (!FIT.maxPx) FIT.maxPx = 1260;
+  return FIT.maxPx;
+}
+function getFitBox(){
+  let b = document.getElementById("fitBox");
+  if (!b){
+    b = document.createElement("div");
+    b.id = "fitBox";
+    b.className = "ppv-scope";
+    b.setAttribute("aria-hidden", "true");
+    document.body.appendChild(b);
+  }
+  return b;
+}
+function measurePaperPx(){
+  const src = document.getElementById("paper");
+  if (!src || !paper) return 0;
+  const box = getFitBox();
+  const clone = src.cloneNode(true);
+  clone.removeAttribute("id");
+  clone.querySelectorAll("[id]").forEach(function(n){ n.removeAttribute("id"); });
+  clone.querySelectorAll(".no-print").forEach(function(n){ n.remove(); });
+  box.innerHTML = "";
+  box.appendChild(clone);
+  return clone.offsetHeight;
+}
+function showFitNotice(html, cls){
+  const n = document.getElementById("fitNotice");
+  if (!n) return;
+  n.className = "fit-note no-print " + (cls || "");
+  n.innerHTML = html;
+  n.style.display = "block";
+  const b = document.getElementById("btnAutoFit");
+  if (b) b.addEventListener("click", autoFit);
+}
+function countsOf(){ return paper ? [paper.items.mcq.length, paper.items.short.length, paper.items.long.length] : [0, 0, 0]; }
+function checkFit(){
+  const btnP = document.getElementById("btnPrint");
+  const notice = document.getElementById("fitNotice");
+  if (!paper){
+    FIT.state = "unknown";
+    if (notice) notice.style.display = "none";
+    if (btnP) btnP.disabled = false;
+    return;
+  }
+  const h = measurePaperPx();
+  FIT.lastPx = h;
+  if (h <= fitMaxPx()){
+    FIT.state = "fit";
+    if (btnP) btnP.disabled = false;
+    const c = countsOf();
+    if (FIT.fitNote && FIT.fitNote.counts.join() === c.join()){
+      showFitNotice(FIT.fitNote.html, "ok");
+    } else {
+      showFitNotice('<span class="urdu">ایک صفحہ ✓</span> — this paper fits on one A4 page.', "ok");
+    }
+  } else {
+    FIT.state = "over";
+    if (btnP) btnP.disabled = true;
+    showFitNotice('<span class="urdu">⚠ یہ پیپر ایک صفحے سے بڑا ہے — پرنٹ کے لیے سوالات کم کریں</span>' +
+      ' <button type="button" class="btn-gold" id="btnAutoFit"><span class="urdu">ایک صفحے کے مطابق خود درست کریں</span></button>', "over");
+  }
+}
+let fitTimer = null;
+function scheduleFitCheck(){
+  if (fitTimer) clearTimeout(fitTimer);
+  fitTimer = setTimeout(function(){
+    if (document.fonts && document.fonts.ready){
+      document.fonts.ready.then(function(){ checkFit(); });
+    } else checkFit();
+  }, 80);
+}
+function autoFit(){
+  if (!paper) return;
+  const floors = {
+    long: paper.items.long.length > 0 ? 1 : 0,
+    short: 0,
+    mcq: paper.items.mcq.length > 0 ? 1 : 0
+  };
+  let guard = 0;
+  checkFit();
+  while (FIT.state === "over" && guard++ < 60){
+    const c = rawCounts();
+    let target = null;
+    for (const t of ["long", "short", "mcq"]){
+      if (c[t] > floors[t]){ target = t; break; }
+    }
+    if (!target) break;
+    const cut = Math.max(1, Math.round(c[target] * 0.2));
+    const nv = Math.max(floors[target], c[target] - cut);
+    if (nv === c[target]) break;
+    document.getElementById(target === "mcq" ? "nMcq" : target === "short" ? "nShort" : "nLong").value = nv;
+    generate();
+    checkFit();
+  }
+  if (FIT.state === "fit"){
+    const c = countsOf();
+    FIT.fitNote = { counts: c, html: '<span class="urdu">✓ اب پیپر ایک A4 صفحے میں ہے</span> — the paper now fits on one A4 page (MCQs ' +
+      c[0] + " • Short " + c[1] + " • Long " + c[2] + ")." };
+    checkFit();
+  }
+}
+/* re-measure after every render (generate / swap / language change / open saved) */
+const __renderOrig = render;
+render = function(){ __renderOrig(); scheduleFitCheck(); };
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ if (paper) checkFit(); });
+</script>
+<script type="module">
+/* Firebase (leads + generation log). Web config = public identifiers.
+   Everything is guarded: if the SDK or network is unavailable, writes
+   stay in the localStorage queue and the tool keeps working. */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc, addDoc, collection, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyDPaD13T_mrvpOIrXZUf3YpDCo_wXZyn14",
+  authDomain: "saif-paper-generator.firebaseapp.com",
+  projectId: "saif-paper-generator",
+  storageBucket: "saif-paper-generator.firebasestorage.app",
+  messagingSenderId: "1005779971224",
+  appId: "1:1005779971224:web:72cbd9512915fe325df4ed"
+};
+window.__fbLog = [];
+try {
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  window.__fbDo = async function(job){
+    let ok = false, note = "", errMsg = "";
+    try {
+      if (job.kind === "lead"){
+        const ref = doc(db, "leads", job.id);
+        const data = {
+          school: job.data.school, teacher: job.data.teacher, city: job.data.city,
+          number: job.data.number, firstSeen: serverTimestamp(), lastSeen: serverTimestamp()
+        };
+        try {
+          await setDoc(ref, data, { merge: true });
+          ok = true; note = "written";
+        } catch (e1) {
+          /* Published rules let anonymous visitors CREATE a lead but not
+             read/update it, so a repeat submit of the same number is
+             denied on update. The lead is already captured — treat as ok. */
+          if (e1 && e1.code === "permission-denied"){ ok = true; note = "already-exists (rules deny anonymous update)"; }
+          else throw e1;
+        }
+      } else if (job.kind === "gen"){
+        await addDoc(collection(db, "generations"), Object.assign({}, job.data, { ts: serverTimestamp() }));
+        ok = true; note = "written";
+      }
+    } catch (e) { errMsg = String((e && (e.code || e.message)) || e); }
+    window.__fbLog.push({ kind: job.kind, id: job.id || null, ok: ok, note: note, err: errMsg });
+    return ok;
+  };
+  if (typeof window.fbFlush === "function") window.fbFlush();
+} catch (e) {
+  window.__fbLog.push({ kind: "init", id: null, ok: false, note: "", err: String((e && e.message) || e) });
+}
 </script>
 </body>
 </html>
