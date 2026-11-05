@@ -354,9 +354,6 @@
   .paper .cov-line{border-top:1px dashed #999; padding:4px 10px; font-size:13px;}
   .paper .cov-line .urdu{line-height:1.9;}
   @media (max-width:640px){ .paper .bi-row{grid-template-columns:1fr;} .paper .bi-ur{border-left:none; padding-left:0;} }
-  .ch-item.excluded{background:#fdf1ef;}
-  .excl-badge{color:#b03030; font-weight:700; font-size:14px; margin-left:6px;}
-  .alp-note{margin:8px 2px 0; padding:8px 12px; background:#fdf1ef; border:1px dashed #d8a7a0; border-radius:8px; color:#8c2f26; font-size:16px; line-height:2.0;}
   .paper-foot{margin-top:18px; border-top:1.5px solid #111; padding-top:7px; text-align:center; font-size:13px; font-weight:700; letter-spacing:.4px;}
   /* answer key rows */
   #answerKey .k-head{margin-bottom:8px; font-size:15px;}
@@ -761,7 +758,6 @@
           <button type="button" class="sel-all" id="btnSelAll">Select All • سب منتخب کریں</button>
         </div>
         <div class="ch-list" id="chList"></div>
-        <p class="alp-note urdu" id="alpNote" style="display:none">یہ حذف Smart Syllabus (ALP) کے تحت صرف سالانہ امتحان 2026 کے لیے تھی؛ 2027 کے لیے سرکاری تصدیق نہیں — چاہیں تو یہ چیپٹرز بھی شامل کر لیں۔</p>
         <p class="avail" id="availLine"></p>
       </div>
 
@@ -1081,9 +1077,6 @@ function setSrc(m){
   updateTotal();
   if (paper) generate();
 }
-/* ---------- Smart Syllabus (ALP) deletions — Annual Examination 2026 ONLY; not a standing syllabus exclusion (verified against real 2026 board papers) ---------- */
-const EXCLUDED = { "9|English": [5, 8, 10], "11|English": [4, 7, 9, 12] };
-function isExcluded(cls, subj, n){ const l = EXCLUDED[cls + "|" + subj]; return l ? l.indexOf(n) > -1 : false; }
 
 const MARKS = { mcq:1, short:2, long:5 };
 const LETTERS = ["a","b","c","d"];
@@ -1181,8 +1174,6 @@ function renderSubjectOptions(cls, selected){
 function renderChapters(cls, subj, prechecked){
   const box = document.getElementById("chList");
   box.innerHTML = "";
-  const alpNote = document.getElementById("alpNote");
-  if (alpNote) alpNote.style.display = EXCLUDED[cls + "|" + subj] ? "" : "none";
   const list = chaptersOf(cls, subj);
   for (const ch of list){
     const lab = document.createElement("label");
@@ -1198,14 +1189,11 @@ function renderChapters(cls, subj, prechecked){
         '<span class="cnt"><span class="soon">سوالات جلد شامل ہوں گے</span> (Questions coming soon)</span>';
       lab.appendChild(span);
     } else {
-      const excl = isExcluded(cls, subj, ch.n);
-      if (excl) lab.className += " excluded";
-      cb.checked = prechecked ? prechecked.indexOf(ch.n) > -1 : (!excl && ch.n === list.find(c => !c.empty).n);
+      cb.checked = prechecked ? prechecked.indexOf(ch.n) > -1 : (ch.n === list.find(c => !c.empty).n);
       cb.addEventListener("change", updateTotal);
       lab.appendChild(cb);
       const span = document.createElement("span");
       span.innerHTML = "Chapter " + ch.n + " — " + esc(ch.t) +
-        (excl ? ' <span class="excl-badge urdu">Smart Syllabus (ALP) — Annual 2026 کے لیے حذف</span>' : '') +
         '<span class="cnt">' + ch.mcq.length + " MCQs • " + ch.short.length + " Short • " + ch.long.length + " Long</span>";
       lab.appendChild(span);
     }
@@ -1336,15 +1324,11 @@ function biRowHTML(it, isMcq){
   if (isMcq && P.urOpts) right += biOptsHTML(P.urOpts, true);
   return '<div class="bi-row"><div class="bi-c bi-en">' + left + '</div><div class="bi-c bi-ur">' + right + '</div></div>';
 }
-/* ---------- coverage line on English papers (included syllabus; Urdu papers carry no exclusion-based coverage line — Urdu has no deleted lessons) ---------- */
+/* ---------- coverage line on English papers (lists the selected chapters) ---------- */
 function coverageHTML(){
   if (!paper || paper.subj !== "English") return "";
-  const excl = EXCLUDED[paper.cls + "|" + paper.subj] || [];
-  let inc = paper.chapters.filter(function(n){ return excl.indexOf(n) < 0; });
-  const excSel = paper.chapters.filter(function(n){ return excl.indexOf(n) > -1; });
-  if (!inc.length) inc = paper.chapters.slice();
+  const inc = paper.chapters.slice();
   let s = '<div class="cov-line"><span class="urdu">شامل سلیبس:</span> ' + (paper.subj === "English" ? "Units " : "Chapters ") + inc.join(", ");
-  if (excSel.length) s += ' <span class="urdu">(Smart Syllabus ALP کے تحت Annual 2026 میں شامل نہیں: ابواب ' + excSel.join("، ") + ')</span>';
   return s + '</div>';
 }
 
